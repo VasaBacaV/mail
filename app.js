@@ -709,7 +709,21 @@
         if (entries[0].isIntersecting && hasMore() && !state.loading && !state.listError) loadList(false);
       }, { root: $("list-view"), rootMargin: "400px" }).observe($("sentinel"));
     }
-    loadList(true);
+    loadList(true).then(openFromLink);
+  }
+
+  // Открыли по ссылке «Полностью — в приложении» из чата: сразу показываем это письмо
+  async function openFromLink() {
+    const param = tg && tg.initDataUnsafe ? tg.initDataUnsafe.start_param || "" : "";
+    const match = /^l(\d+)$/.exec(param);
+    if (!match || state.folder !== "INBOX") return;
+    const uid = Number(match[1]);
+    for (let page = 0; page < 5; page++) {
+      const index = state.items.findIndex((item) => item.uid === uid);
+      if (index >= 0) return openLetter(index);
+      if (!hasMore() || state.listError) return;
+      await loadList(false);
+    }
   }
 
   init();
