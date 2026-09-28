@@ -1,55 +1,97 @@
 <!doctype html>
 <html lang="ru" data-repo="VasaBacaV/mail" data-branch="main">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://telegram.org; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data: https:; frame-src 'self'; connect-src https://*.lhr.life https://*.trycloudflare.com https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="referrer" content="no-referrer">
-  <meta name="color-scheme" content="light dark">
-  <title>Почта МГТУ</title>
-  <link rel="stylesheet" href="app.css">
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script src="app.js" defer></script>
-</head>
-<body>
-  <div id="app">
-    <section id="list-view" class="view" aria-label="Список писем">
-      <header class="topbar">
-        <div id="folders" class="segmented" role="tablist"></div>
-        <button id="refresh" class="icon-btn" type="button" aria-label="Обновить"></button>
-      </header>
-      <div id="list" class="list" role="list"></div>
-      <div id="list-status" class="status"></div>
-      <div id="sentinel" aria-hidden="true"></div>
-    </section>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Почта МГТУ</title>
+    <link rel="stylesheet" href="app.css" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div id="app">
+      <section id="list-view" class="view" aria-label="Список писем">
+        <header class="topbar">
+          <div id="folders" class="segmented" role="tablist"></div>
+          <button
+            id="refresh"
+            class="icon-btn"
+            type="button"
+            aria-label="Обновить"
+          ></button>
+        </header>
+        <div id="list" class="list" role="list"></div>
+        <div id="list-status" class="status"></div>
+        <div id="sentinel" aria-hidden="true"></div>
+      </section>
 
-    <section id="letter-view" class="view" aria-label="Письмо">
-      <header class="topbar letter-bar">
-        <button id="back" class="icon-btn" type="button" aria-label="Назад"></button>
-        <span id="position" class="position"></span>
-        <button id="prev" class="icon-btn" type="button" aria-label="Более новое письмо"></button>
-        <button id="next" class="icon-btn" type="button" aria-label="Более старое письмо"></button>
-      </header>
-      <article id="letter" class="letter">
-        <div class="placeholder">Выберите письмо</div>
-      </article>
-    </section>
-  </div>
+      <section id="letter-view" class="view" aria-label="Письмо">
+        <header class="topbar letter-bar">
+          <button
+            id="back"
+            class="icon-btn"
+            type="button"
+            aria-label="Назад"
+          ></button>
+          <span id="position" class="position"></span>
+          <button
+            id="prev"
+            class="icon-btn"
+            type="button"
+            aria-label="Более новое письмо"
+          ></button>
+          <button
+            id="next"
+            class="icon-btn"
+            type="button"
+            aria-label="Более старое письмо"
+          ></button>
+        </header>
+        <article id="letter" class="letter">
+          <div class="placeholder">Выберите письмо</div>
+        </article>
+      </section>
+    </div>
 
-  <div id="viewer" class="viewer" hidden>
-    <div class="viewer-top">
-      <button id="viewer-close" class="icon-btn light" type="button" aria-label="Закрыть"></button>
-      <div class="viewer-title">
-        <div id="viewer-name" class="viewer-name"></div>
-        <div id="viewer-count" class="viewer-count"></div>
+    <div id="viewer" class="viewer" hidden>
+      <div class="viewer-top">
+        <button
+          id="viewer-close"
+          class="icon-btn light"
+          type="button"
+          aria-label="Закрыть"
+        ></button>
+        <div class="viewer-title">
+          <div id="viewer-name" class="viewer-name"></div>
+          <div id="viewer-count" class="viewer-count"></div>
+        </div>
+        <button
+          id="viewer-download"
+          class="icon-btn light"
+          type="button"
+          aria-label="Скачать"
+        ></button>
       </div>
-      <button id="viewer-download" class="icon-btn light" type="button" aria-label="Скачать"></button>
+      <div class="viewer-stage">
+        <button
+          id="viewer-prev"
+          class="viewer-arrow left"
+          type="button"
+          aria-label="Предыдущее фото"
+        ></button>
+        <img id="viewer-img" alt="" />
+        <button
+          id="viewer-next"
+          class="viewer-arrow right"
+          type="button"
+          aria-label="Следующее фото"
+        ></button>
+      </div>
     </div>
-    <div class="viewer-stage">
-      <button id="viewer-prev" class="viewer-arrow left" type="button" aria-label="Предыдущее фото"></button>
-      <img id="viewer-img" alt="">
-      <button id="viewer-next" class="viewer-arrow right" type="button" aria-label="Следующее фото"></button>
-    </div>
-  </div>
-</body>
+  </body>
 </html>
