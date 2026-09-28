@@ -653,7 +653,6 @@ body.letter-open #list-view {
   max-height: 100%;
   object-fit: contain;
   user-select: none;
-  -webkit-user-drag: none;
 }
 .viewer-arrow {
   position: absolute;
